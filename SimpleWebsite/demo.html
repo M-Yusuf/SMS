@@ -1,3 +1,5 @@
+$def with (registerForm, statuses)
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -8,9 +10,9 @@
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-        <link href='reset.css' rel='stylesheet' type='text/css'>
-        <link href='grid.css' rel='stylesheet' type='text/css'>
-        <link href='main.css' rel='stylesheet' type='text/css'>
+        <link href='/static/reset.css' rel='stylesheet' type='text/css'>
+        <link href='/static/grid.css' rel='stylesheet' type='text/css'>
+        <link href='/static/main.css' rel='stylesheet' type='text/css'>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     </head>
@@ -66,6 +68,11 @@
                     <li class="status-name">David Beckham</li>
                     <li class="status-message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada et tortor luctus pretium. Cras ac elit massa. Cras nec diam sed augue suscipit placerat. Sed ornare felis semper, efficitur risus at, gravida metus.</li>
                   </ul>
+                  $for status in statuses:
+                    <ul>
+                      <li class="status-name">$status['name']</li>
+                      <li class="status-message">$status['status']</li>
+                    </ul>
                 </li>
               </ul>
             </div>
@@ -105,13 +112,9 @@
             <div class="modal-content">
               <div class="modal-contact-body modal-form modal-body">
                  <h2><i class="fa fa-space-shuttle"></i>Contact</h2>
-                 <ul>
-                  <li><input type="text" placeholder="Full Name"></li>   
-                  <li><input type="text" placeholder="Email"></li>
-                  <li><input type="text" placeholder="Subject"></li>
-                  <li><textarea type="text" placeholder="Message"></textarea></li>
-                  <li><input type="submit" placeholder="Send"></li>
-                </ul>
+                  <form method="post">
+                  $:registerForm.render()
+                 </form>
               </div>
             </div>
           </div>
@@ -121,12 +124,9 @@
             <div class="modal-content">
               <div class="modal-number-body modal-form modal-body">
                  <h2><i class="fa fa-mobile"></i>Phone Number</h2>
-                 <ul>
-                  <li><input type="text" placeholder="Full Name"></li>   
-                  <li><input type="text" placeholder="Phone Number"></li>   
-                  <li><input type="text" placeholder="Security Code"></li>
-                  <li><input type="submit" placeholder="Submit"></li>
-                </ul>
+                 <form method="post">
+                  $:registerForm.render()
+                 </form>
               </div>
             </div>
           </div>
