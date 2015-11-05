@@ -19,10 +19,10 @@ registerForm=form.Form(
 	form.Button('Submit', class_='centertext')
 )
 
-db=web.database(dbn='mysql', db='', user='', pw='')
+db=web.database(dbn='mysql', db='demo', user='root', pw='')
 
-account_sid = ""
-auth_token  = ""
+account_sid = "AC9f741b4149deea2e2e8b3c159b291ec0"
+auth_token  = "0faf384ac00f90a396f8dc95180f217c"
 client = TwilioRestClient(account_sid, auth_token)
 
 class Index:
@@ -49,8 +49,8 @@ class Demo:
 
 		try:
 			message = client.messages.create(body="Thanks for registering with us!",
-				to="+" + str(number),
-				from_="+")
+				to="+1" + str(number),
+				from_="+16103475899")
 		except Exception as e:
 			raise web.seeother('/#invalidnumber')
 
@@ -68,8 +68,8 @@ class ReceiveSMS:
 			name=db.query('SELECT name FROM users WHERE phone=' + fromNum)[0]['name']
 		except IndexError:
 			message = client.messages.create(body="You aren't registered! Do so at <todo:put site url here>.",
-				to="+" + str(fromNum),
-				from_="+")
+				to="+1" + str(fromNum),
+				from_="+16103475899")
 			return False
 
 		msg=re.findall('(?<=&Body=)(.*)(?=&FromCountry)', web.data())[0]
@@ -79,8 +79,8 @@ class ReceiveSMS:
 		db.update('statuses', where='phone=' + fromNum, status=msg)
 
 		message = client.messages.create(body="Alright " + name + ", I've set your status to \"" + str(msg) + "\"",
-				to="+" + str(fromNum),
-				from_="+")
+				to="+1" + str(fromNum),
+				from_="+16103475899")
 
 
 
